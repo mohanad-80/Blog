@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import PostCard from "../PostCard";
-<<<<<<< HEAD
-=======
-// import ErrorBox from "../ErrorBox";
->>>>>>> 52881aaccc5c53c04b817631d1f324fb375169e2
 import {
   Autocomplete,
   TextField,
