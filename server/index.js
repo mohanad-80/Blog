@@ -66,6 +66,20 @@ postsRoute.post((req, res) => {
     });
 });
 
+postsRoute.patch((req, res) => {
+  Post.findByIdAndUpdate(req.body.id, {
+    title: req.body.title,
+    content: req.body.content,
+    dateOfModification: req.body.dateOfModification,
+  })
+    .then(() => {
+      res.send("post edited");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
 postRoute.get((req, res) => {
   const id = req.params.id;
   Post.findById(id)

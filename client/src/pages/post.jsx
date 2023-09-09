@@ -11,6 +11,7 @@ import {
   Backdrop,
   CircularProgress,
   Chip,
+  Collapse,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
@@ -29,6 +30,7 @@ export default function Post() {
 
   const params = useParams();
 
+  // for the three dots menu
   // #########################
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -37,6 +39,15 @@ export default function Post() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  // #########################
+
+  // for the animation of the create comment section
+  // #########################
+  const [checked, setChecked] = useState(false);
+
+  const openCreateSection = () => {
+    setChecked((prev) => !prev);
   };
   // #########################
 
@@ -109,7 +120,17 @@ export default function Post() {
       ) : (
         <div>
           <h2>{post.title}</h2>
-          <h5 className="dateStamp">{post.dateOfCreation}</h5>
+          <div className="dateStamp">
+            <h5>
+              <strong>Created at: </strong>
+              {post.dateOfCreation}
+            </h5>
+            {post.dateOfModification && (
+              <h5>
+                <strong>Edited at:</strong> {post.dateOfModification}
+              </h5>
+            )}
+          </div>
           <p>{post.content}</p>
           {/* ############## */}
           <div className="menuBtn">
@@ -138,7 +159,16 @@ export default function Post() {
                 },
               }}
             >
-              <MenuItem onClick={handleClose}>Edit</MenuItem>
+              <Link
+                to={"/edit"}
+                state={{
+                  id: params.id,
+                  title: post.title,
+                  content: post.content,
+                }}
+              >
+                <MenuItem>Edit</MenuItem>
+              </Link>
               <Link to="/">
                 <MenuItem onClick={deletePost}>Delete</MenuItem>
               </Link>
@@ -153,15 +183,14 @@ export default function Post() {
                 onClick={increaseLiks}
                 variant="outlined"
               />
-              {/* <button onClick={increaseLiks}>👍</button> {likes} likes */}
             </li>
             <li>
               <Chip
                 icon={<ModeCommentOutlinedIcon />}
                 label={comments.length}
                 variant="outlined"
+                onClick={openCreateSection}
               />
-              {/* {comments.length} comments */}
             </li>
             <li>
               <Chip
@@ -169,11 +198,12 @@ export default function Post() {
                 label={post.views}
                 variant="outlined"
               />
-              {/* {post.views} views */}
             </li>
           </ul>
           <hr />
-          <CreateComment onCommentAdded={addComment} />
+          <Collapse in={checked}>
+            <CreateComment onCommentAdded={addComment} />
+          </Collapse>
           {commentError && (
             <ErrorBox message="Failed to save the comment... please try again." />
           )}
