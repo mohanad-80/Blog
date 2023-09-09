@@ -1,0 +1,179 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.container {
+  margin: 1rem;
+  min-height: 86vh;
+  min-height: 86dvh;
+}
+
+.nav {
+  background-color: #818181;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.site-title {
+  font-size: 2rem;
+}
+
+.nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav a {
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: .25rem;
+}
+
+.nav li.active {
+  background-color: #aeaaaa;
+}
+
+.nav li:hover {
+  background-color: #777;
+}
+
+.postsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.postCard h2 {
+  margin: 0.5rem 0;
+}
+
+.postCard ul {
+  margin-top: 0.5rem;
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  font-weight: 600;
+}
+
+.postCard {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.postCard:hover {
+  background-color: #DDD;
+}
+
+.full:hover {
+  background-color: white;
+}
+
+hr {
+  margin: 5px 0;
+}
+
+.create-comment {
+  margin: 10px 0;
+}
+
+.create-comment button{
+  height: 20px;
+  width: 50px;
+  text-align: center;
+  border: 1px solid #333333;
+  border-radius: 5px;
+  background-color: #EEE;
+}
+
+.create-comment button:hover{
+  background-color: #DDD;
+}
+
+.comment {
+  display: flex;
+  gap: 5px;
+  margin: 15px 0;
+}
+
+.create-container input{
+  border: 3px solid #cccccc;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.avatar img {
+  border-radius: 50%;
+}
+
+.error-box {
+  height: 40px;
+  max-width: 300px;
+  border: 3px solid red;
+  border-radius: 10px;
+  background-color: rgb(255, 0, 0, 0.3);
+  padding-left: 10px;
+  margin: 10px 0;
+}
+
+textarea {
+  max-width: 600px;
+	width: calc(100% - 14px);
+	height: 50px;
+	border: 3px solid #cccccc;
+  border-radius: 10px;
+	padding: 5px;
+  resize: none;
+}
+
+.footer {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.postBtn {
+  height: 25px;
+  width: 40px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #EEE;
+  margin-top: 5px;
+}
+
+.postBtn:hover {
+  background-color: #DDD;
+}
+
+.postBtn a {
+  text-decoration: none;
+}
+
+.menuBtn {
+  position: absolute;
+  right: 20px;
+  top: 68px;
+}
+
+.dateStamp {
+  margin-bottom: 10px;
+  font-weight: 200;
+}
