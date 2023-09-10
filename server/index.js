@@ -2,10 +2,15 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import "dotenv/config";
+import cors from "cors";
 
 const app = express();
 const PORT = 5000;
 
+const corsOptions = {
+  origin: "https://blog-project-iilf.onrender.com", // frontend URI (ReactJS)
+}
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
