@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 
@@ -27,8 +28,15 @@ export default function Post() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [commentError, setCommentError] = useState(false);
+  const [liked, setLiked] = useState(false);
 
   const params = useParams();
+
+  useEffect(() => {
+    if (localStorage.getItem(params.id)) {
+      setLiked(true);
+    }
+  }, [params.id]);
 
   // for the three dots menu
   // #########################
@@ -70,15 +78,31 @@ export default function Post() {
   }, [params.id]);
 
   function increaseLiks() {
-    setLikes(likes + 1);
-    axios
-      .patch("/post/" + params.id, { likes: likes + 1 })
-      .then(() => {
-        console.log("done");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (!liked) {
+      setLikes(likes + 1);
+      setLiked(true);
+      axios
+        .patch("/post/" + params.id, { likes: likes + 1 })
+        .then(() => {
+          console.log("done");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      localStorage.setItem(params.id, "true");
+    } else {
+      setLikes(likes - 1);
+      setLiked(false);
+      axios
+        .patch("/post/" + params.id, { likes: likes - 1 })
+        .then(() => {
+          console.log("done");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      localStorage.removeItem(params.id);
+    }
   }
 
   function addComment(comment) {
@@ -179,7 +203,7 @@ export default function Post() {
           <ul className="stat">
             <li>
               <Chip
-                icon={<ThumbUpOutlinedIcon />}
+                icon={liked ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
                 label={likes}
                 onClick={increaseLiks}
                 variant="outlined"
