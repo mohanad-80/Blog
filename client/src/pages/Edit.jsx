@@ -24,6 +24,7 @@ export default function Edit() {
     title: title,
     content: content,
   });
+  const postRoute = `/post/${id}`;
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -63,7 +64,13 @@ export default function Edit() {
   return (
     <div className="create-container">
       <h3>Title</h3>
-      <input onChange={handleChange} type="text" id="postTitle" name="title" value={text.title} />
+      <input
+        onChange={handleChange}
+        type="text"
+        id="postTitle"
+        name="title"
+        value={text.title}
+      />
       <h3>Content</h3>
       <textarea
         onChange={handleChange}
@@ -76,7 +83,10 @@ export default function Edit() {
       ></textarea>
       <br />
       <button onClick={sendData} className="postBtn">
-        <Link to="/">Post</Link>
+        <Link to={postRoute}>Save</Link>
+      </button>
+      <button className="postBtn" style={{ width: 50, marginLeft: 10 }}>
+        <Link to={postRoute}>Cancel</Link>
       </button>
     </div>
   );

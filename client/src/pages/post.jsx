@@ -151,6 +151,7 @@ export default function Post() {
               }}
               anchorEl={anchorEl}
               open={open}
+              disableScrollLock
               onClose={handleClose}
               PaperProps={{
                 style: {
