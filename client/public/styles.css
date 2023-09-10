@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap');
+
 * {
   padding: 0;
   margin: 0;
@@ -5,6 +7,15 @@
 
 body {
   margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+}
+
+textarea {
+  font-family: 'Noto Sans', sans-serif;
 }
 
 a {
@@ -96,11 +107,20 @@ hr {
   margin: 10px 0;
 }
 
-.create-comment button{
+.create-comment button.old{
   height: 20px;
   width: 50px;
   text-align: center;
   border: 1px solid #333333;
+  border-radius: 5px;
+  background-color: #EEE;
+}
+.create-comment button.new{
+  height: 23px;
+  width: 50px;
+  text-align: center;
+  border: 1px solid #818181;
+  color: #333;
   border-radius: 5px;
   background-color: #EEE;
 }
@@ -170,7 +190,7 @@ textarea {
 .menuBtn {
   position: absolute;
   right: 20px;
-  top: 68px;
+  top: 97px;
 }
 
 .dateStamp {

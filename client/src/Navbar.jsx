@@ -1,13 +1,11 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import BookIcon from "@mui/icons-material/Book";
 import CreateRoundedIcon from "@mui/icons-material/CreateRounded";
 
 export default function Navbar() {
   return (
     <nav className="nav">
       <Link to="/" className="site-title">
-        <BookIcon />
-        Blog
+        <h1>Blog</h1>
       </Link>
       <ul>
         <CustomLink to="/Create">
