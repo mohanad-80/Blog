@@ -47,7 +47,7 @@ export default function Edit() {
       // const date = new Date().toUTCString();
 
       axios
-        .patch("/posts", {
+        .patch("https://blog-project-vx61.onrender.com/posts", {
           ...text,
           id: id,
           dateOfModification: date,

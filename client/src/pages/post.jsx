@@ -61,7 +61,7 @@ export default function Post() {
 
   useEffect(() => {
     axios
-      .get("/post/" + params.id)
+      .get("https://blog-project-vx61.onrender.com/post/" + params.id)
       .then((response) => {
         setPost(response.data);
         setLikes(response.data.likes);
@@ -82,7 +82,7 @@ export default function Post() {
       setLikes(likes + 1);
       setLiked(true);
       axios
-        .patch("/post/" + params.id, { likes: likes + 1 })
+        .patch("https://blog-project-vx61.onrender.com/post/" + params.id, { likes: likes + 1 })
         .then(() => {
           console.log("done");
         })
@@ -94,7 +94,7 @@ export default function Post() {
       setLikes(likes - 1);
       setLiked(false);
       axios
-        .patch("/post/" + params.id, { likes: likes - 1 })
+        .patch("https://blog-project-vx61.onrender.com/post/" + params.id, { likes: likes - 1 })
         .then(() => {
           console.log("done");
         })
@@ -107,7 +107,7 @@ export default function Post() {
 
   function addComment(comment) {
     axios
-      .post("/post/" + params.id, { comment: comment })
+      .post("https://blog-project-vx61.onrender.com/post/" + params.id, { comment: comment })
       .then((response) => {
         console.log(response.data);
         setComments((prevValue) => {
@@ -123,7 +123,7 @@ export default function Post() {
 
   function deletePost() {
     axios
-      .delete("/post/" + params.id)
+      .delete("https://blog-project-vx61.onrender.com/post/" + params.id)
       .then(() => {})
       .catch((err) => {
         console.log(err);

@@ -17,7 +17,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get("/posts")
+      .get("https://blog-project-vx61.onrender.com/posts")
       .then(function (response) {
         response.data.reverse();
         setPosts(response.data);

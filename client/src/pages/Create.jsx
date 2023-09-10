@@ -44,7 +44,7 @@ export default function Create() {
       // const date = new Date().toUTCString();
 
       axios
-        .post("/posts", {
+        .post("https://blog-project-vx61.onrender.com/posts", {
           ...text,
           dateOfCreation: date,
           likes: 0,
