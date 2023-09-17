@@ -8,8 +8,8 @@ const app = express();
 const PORT = 5000;
 
 const corsOptions = {
-  origin: "https://blog-project-iilf.onrender.com", // frontend URI (ReactJS)
-}
+  origin: "*",
+};
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
