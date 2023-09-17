@@ -47,7 +47,7 @@ export default function Edit() {
       // const date = new Date().toUTCString();
 
       axios
-        .patch("https://blog-project-vx61.onrender.com/posts", {
+        .patch(`${process.env.REACT_APP_API_URL}/posts`, {
           ...text,
           id: id,
           dateOfModification: date,
@@ -76,8 +76,9 @@ export default function Edit() {
         onChange={handleChange}
         id="postContent"
         name="content"
-        rows="7"
+        rows="auto"
         cols="50"
+        auto
         value={text.content}
         className="edit-text-area"
       ></textarea>

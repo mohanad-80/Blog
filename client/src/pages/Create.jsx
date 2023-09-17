@@ -44,7 +44,7 @@ export default function Create() {
       // const date = new Date().toUTCString();
 
       axios
-        .post("https://blog-project-vx61.onrender.com/posts", {
+        .post(`${process.env.REACT_APP_API_URL}/posts`, {
           ...text,
           dateOfCreation: date,
           likes: 0,
@@ -71,6 +71,7 @@ export default function Create() {
         name="content"
         rows="4"
         cols="50"
+        style={{resize:"vertical"}}
       ></textarea>
       <br />
       <button onClick={sendData} className="postBtn">

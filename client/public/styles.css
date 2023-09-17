@@ -162,7 +162,7 @@ textarea {
 	border: 3px solid #cccccc;
   border-radius: 10px;
 	padding: 5px;
-  resize: none;
+  resize: vertical;
 }
 
 .footer {
@@ -199,4 +199,9 @@ textarea {
 
 .dateStamp h5 {
   font-weight: 200;
+}
+
+pre {
+  text-wrap: wrap;
+  font-family: 'Noto Sans', sans-serif;
 }

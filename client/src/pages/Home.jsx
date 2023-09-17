@@ -14,10 +14,15 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [searchedTitle, setSearchedTitle] = useState();
+
+  const filteredPosts = searchedTitle
+    ? posts.filter((post) => post.title === searchedTitle)
+    : posts;
 
   useEffect(() => {
     axios
-      .get("https://blog-project-vx61.onrender.com/posts")
+      .get(`${process.env.REACT_APP_API_URL}/posts`)
       .then(function (response) {
         response.data.reverse();
         setPosts(response.data);
@@ -42,6 +47,13 @@ export default function Home() {
         renderInput={(params) => (
           <TextField {...params} label="Search title" variant="standard" />
         )}
+        onChange={(e, v, r) => {
+          if (r === "selectOption") {
+            setSearchedTitle(v);
+          } else if (r === "clear") {
+            setSearchedTitle("");
+          }
+        }}
       />
 
       {error ? (
@@ -57,7 +69,7 @@ export default function Home() {
           <CircularProgress color="inherit" />
         </Backdrop>
       ) : (
-        posts.map((post) => {
+        filteredPosts.map((post) => {
           return (
             <PostCard
               key={post._id}
