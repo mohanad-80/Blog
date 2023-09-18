@@ -40,17 +40,17 @@ export default function Home() {
   return (
     <div className="postsContainer">
       <Autocomplete
-        sx={{ width: 300 }}
+        sx={{ width: 400 }}
         id="free-solo-demo"
         freeSolo
         options={posts.map((option) => option.title)}
         renderInput={(params) => (
           <TextField {...params} label="Search title" variant="standard" />
         )}
-        onChange={(e, v, r) => {
-          if (r === "selectOption") {
-            setSearchedTitle(v);
-          } else if (r === "clear") {
+        onChange={(event, value, reason) => {
+          if (reason === "selectOption") {
+            setSearchedTitle(value);
+          } else if (reason === "clear") {
             setSearchedTitle("");
           }
         }}

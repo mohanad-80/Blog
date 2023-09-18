@@ -143,19 +143,7 @@ export default function Post() {
         </Backdrop>
       ) : (
         <div>
-          <h2>{post.title}</h2>
-          <div className="dateStamp">
-            <h5>
-              <strong>Created at: </strong>
-              {post.dateOfCreation}
-            </h5>
-            {post.dateOfModification && (
-              <h5>
-                <strong>Edited at:</strong> {post.dateOfModification}
-              </h5>
-            )}
-          </div>
-          <pre>{`${post.content}`}</pre>
+          <h2>{post.title}
           {/* ############## */}
           <div className="menuBtn">
             <IconButton
@@ -200,6 +188,20 @@ export default function Post() {
             </Menu>
           </div>
           {/* ############## */}
+          </h2>
+          <div className="dateStamp">
+            <h5>
+              <strong>Created: </strong>
+              {post.dateOfCreation}
+            </h5>
+            {post.dateOfModification && (
+              <h5>
+                <strong>Edited:</strong> {post.dateOfModification}
+              </h5>
+            )}
+          </div>
+          <pre>{`${post.content}`}</pre>
+          
           <ul className="stat">
             <li>
               <Chip

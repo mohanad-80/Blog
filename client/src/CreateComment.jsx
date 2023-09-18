@@ -1,6 +1,5 @@
 import { useState } from "react";
 import ErrorBox from "./ErrorBox";
-import Button from "@mui/material/Button";
 
 export default function CreateComment(props) {
   const [comment, setComment] = useState("");
@@ -27,7 +26,7 @@ export default function CreateComment(props) {
         // cols="40"
       ></textarea>
       <br />
-      <Button
+      <button
         onClick={() => {
           comment ? props.onCommentAdded(comment) : setError(true);
           setComment("");
@@ -36,7 +35,7 @@ export default function CreateComment(props) {
         className="new"
       >
         Submit
-      </Button>
+      </button>
       {error && <ErrorBox message="Please write something to be published" />}
     </div>
   );
