@@ -202,31 +202,31 @@ export default function Post() {
           </div>
           <pre>{`${post.content}`}</pre>
           
-          <ul className="stat">
-            <li>
+          <div className="stat">
+            <div className="likes">
               <Chip
                 icon={liked ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
                 label={likes}
                 onClick={increaseLiks}
                 variant="outlined"
               />
-            </li>
-            <li>
+            </div>
+            <div className="comments">
               <Chip
                 icon={<ModeCommentOutlinedIcon />}
                 label={comments.length}
                 variant="outlined"
                 onClick={openCreateSection}
               />
-            </li>
-            <li>
+            </div>
+            <div className="views">
               <Chip
                 icon={<RemoveRedEyeOutlinedIcon />}
                 label={post.views}
                 variant="outlined"
               />
-            </li>
-          </ul>
+            </div>
+          </div>
           <hr />
           <Collapse in={checked}>
             <CreateComment onCommentAdded={addComment} />
