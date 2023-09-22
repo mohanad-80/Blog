@@ -6,6 +6,7 @@ import Contact from "./pages/Contact.jsx";
 import Footer from "./Footer.jsx";
 import Post from "./pages/post.jsx";
 import Edit from "./pages/Edit.jsx";
+import Hero from "./pages/Hero.jsx";
 import { Route, Routes } from "react-router-dom";
 import ScrollUp from "./ScrollUp.jsx";
 
@@ -16,7 +17,15 @@ function App() {
       <div className="body-container">
         <div className="container">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={
+                <div>
+                  <Hero />
+                  <Home />
+                </div>
+              }
+            />
             <Route path="/post/:id" element={<Post />} />
             <Route path="/create" element={<Create />} />
             <Route path="/about" element={<About />} />

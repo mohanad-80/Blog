@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <div className="footer">
-      <p>Version: 1.1.1</p>
+      <p>Version: 1.2.0</p>
       <p>
         Made by
         <span style={{ fontStyle: "italic" }}>

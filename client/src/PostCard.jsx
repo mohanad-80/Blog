@@ -7,8 +7,8 @@ export default function PostCard(props) {
         <h2>{props.title}</h2>
         <h5 className="dateStamp">{props.date}</h5>
         <p>
-          {props.content.length > 100
-            ? props.content.slice(0, 100) + "..."
+          {props.content.length > 225
+            ? props.content.slice(0, 225) + "..."
             : props.content}
         </p>
         <ul>
