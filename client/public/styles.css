@@ -212,7 +212,7 @@ body {
   background-color: var(--background-color);
 }
 
-.likes, .comments, .views {
+.likes, .comments, .share, .views {
   display: inline;
   margin: 5px;
   margin-top: 10px;
