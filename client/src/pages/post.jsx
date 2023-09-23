@@ -4,6 +4,7 @@ import axios from "axios";
 import Comment from "../Comment";
 import CreateComment from "../CreateComment";
 import ErrorBox from "../ErrorBox";
+import SimpleDialogDemo from "../ShareButton";
 import {
   IconButton,
   Menu,
@@ -18,6 +19,7 @@ import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import SendRoundedIcon from '@mui/icons-material/SendRounded';
 
 const ITEM_HEIGHT = 48;
 
@@ -29,6 +31,7 @@ export default function Post() {
   const [error, setError] = useState(false);
   const [commentError, setCommentError] = useState(false);
   const [liked, setLiked] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const params = useParams();
 
@@ -82,7 +85,9 @@ export default function Post() {
       setLikes(likes + 1);
       setLiked(true);
       axios
-        .patch(`${process.env.REACT_APP_API_URL}/post/` + params.id, { likes: likes + 1 })
+        .patch(`${process.env.REACT_APP_API_URL}/post/` + params.id, {
+          likes: likes + 1,
+        })
         .then(() => {
           console.log("done");
         })
@@ -94,7 +99,9 @@ export default function Post() {
       setLikes(likes - 1);
       setLiked(false);
       axios
-        .patch(`${process.env.REACT_APP_API_URL}/post/` + params.id, { likes: likes - 1 })
+        .patch(`${process.env.REACT_APP_API_URL}/post/` + params.id, {
+          likes: likes - 1,
+        })
         .then(() => {
           console.log("done");
         })
@@ -107,7 +114,9 @@ export default function Post() {
 
   function addComment(comment) {
     axios
-      .post(`${process.env.REACT_APP_API_URL}/post/` + params.id, { comment: comment })
+      .post(`${process.env.REACT_APP_API_URL}/post/` + params.id, {
+        comment: comment,
+      })
       .then((response) => {
         console.log(response.data);
         setComments((prevValue) => {
@@ -143,51 +152,52 @@ export default function Post() {
         </Backdrop>
       ) : (
         <div>
-          <h2>{post.title}
-          {/* ############## */}
-          <div className="menuBtn">
-            <IconButton
-              aria-label="more"
-              id="long-button"
-              aria-controls={open ? "long-menu" : undefined}
-              aria-expanded={open ? "true" : undefined}
-              aria-haspopup="true"
-              onClick={handleClick}
-            >
-              <MoreVertIcon />
-            </IconButton>
-            <Menu
-              id="long-menu"
-              MenuListProps={{
-                "aria-labelledby": "long-button",
-              }}
-              anchorEl={anchorEl}
-              open={open}
-              disableScrollLock
-              onClose={handleClose}
-              PaperProps={{
-                style: {
-                  maxHeight: ITEM_HEIGHT * 4.5,
-                  width: "10ch",
-                },
-              }}
-            >
-              <Link
-                to={"/edit"}
-                state={{
-                  id: params.id,
-                  title: post.title,
-                  content: post.content,
+          <h2>
+            {post.title}
+            {/* ############## */}
+            <div className="menuBtn">
+              <IconButton
+                aria-label="more"
+                id="long-button"
+                aria-controls={open ? "long-menu" : undefined}
+                aria-expanded={open ? "true" : undefined}
+                aria-haspopup="true"
+                onClick={handleClick}
+              >
+                <MoreVertIcon />
+              </IconButton>
+              <Menu
+                id="long-menu"
+                MenuListProps={{
+                  "aria-labelledby": "long-button",
+                }}
+                anchorEl={anchorEl}
+                open={open}
+                disableScrollLock
+                onClose={handleClose}
+                PaperProps={{
+                  style: {
+                    maxHeight: ITEM_HEIGHT * 4.5,
+                    width: "10ch",
+                  },
                 }}
               >
-                <MenuItem>Edit</MenuItem>
-              </Link>
-              <Link to="/">
-                <MenuItem onClick={deletePost}>Delete</MenuItem>
-              </Link>
-            </Menu>
-          </div>
-          {/* ############## */}
+                <Link
+                  to={"/edit"}
+                  state={{
+                    id: params.id,
+                    title: post.title,
+                    content: post.content,
+                  }}
+                >
+                  <MenuItem>Edit</MenuItem>
+                </Link>
+                <Link to="/">
+                  <MenuItem onClick={deletePost}>Delete</MenuItem>
+                </Link>
+              </Menu>
+            </div>
+            {/* ############## */}
           </h2>
           <div className="dateStamp">
             <h5>
@@ -201,7 +211,7 @@ export default function Post() {
             )}
           </div>
           <pre>{`${post.content}`}</pre>
-          
+
           <div className="stat">
             <div className="likes">
               <Chip
@@ -217,6 +227,18 @@ export default function Post() {
                 label={comments.length}
                 variant="outlined"
                 onClick={openCreateSection}
+              />
+            </div>
+            <div className="share">
+              <Chip
+                icon={<SendRoundedIcon />}
+                label={<SimpleDialogDemo open={openDialog} />}
+                variant="outlined"
+                onClick={() => {
+                  setOpenDialog((prev) => {
+                    return !prev;
+                  });
+                }}
               />
             </div>
             <div className="views">
