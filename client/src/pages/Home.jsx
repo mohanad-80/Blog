@@ -76,6 +76,7 @@ export default function Home() {
               id={post._id}
               title={post.title}
               content={post.content}
+              image={post.image && post.image}
               date={post.dateOfCreation}
               likes={post.likes}
               comments={post.comments.length}

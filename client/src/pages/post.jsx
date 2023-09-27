@@ -19,7 +19,7 @@ import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
-import SendRoundedIcon from '@mui/icons-material/SendRounded';
+import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
 const ITEM_HEIGHT = 48;
 
@@ -113,10 +113,9 @@ export default function Post() {
   }
 
   function addComment(comment) {
+    // console.log(comment);
     axios
-      .post(`${process.env.REACT_APP_API_URL}/post/` + params.id, {
-        comment: comment,
-      })
+      .post(`${process.env.REACT_APP_API_URL}/post/` + params.id, comment)
       .then((response) => {
         console.log(response.data);
         setComments((prevValue) => {
@@ -152,7 +151,8 @@ export default function Post() {
         </Backdrop>
       ) : (
         <div>
-          <h2>
+          <img src={post.image} alt="" className="post-img" />
+          <h2 className="post-title">
             {post.title}
             {/* ############## */}
             <div className="menuBtn">
@@ -188,6 +188,7 @@ export default function Post() {
                     id: params.id,
                     title: post.title,
                     content: post.content,
+                    image: post.image,
                   }}
                 >
                   <MenuItem>Edit</MenuItem>
@@ -258,7 +259,13 @@ export default function Post() {
           )}
           <p>Comments:</p>
           {comments.map((comment, idx) => {
-            return <Comment key={idx} content={comment} />;
+            return (
+              <Comment
+                key={idx}
+                content={comment.content ? comment.content : comment}
+                time={comment.timeStamp && comment.timeStamp}
+              />
+            );
           })}
         </div>
       )}

@@ -19,10 +19,12 @@ const months = [
 
 export default function Edit() {
   const state = useLocation();
-  const { title, content, id } = state.state;
+  const { title, content, image, id } = state.state;
+  console.log(state.state);
   const [text, setText] = useState({
     title: title,
     content: content,
+    image: image,
   });
   const postRoute = `/post/${id}`;
 
@@ -63,6 +65,29 @@ export default function Edit() {
 
   return (
     <div className="create-container">
+      <h3>Choose an image*</h3>
+      <input
+        onChange={(e) => {
+          const image = e.target.name;
+          const img = e.target.files[0];
+          var file = img;
+          var reader = new FileReader();
+          reader.onloadend = function () {
+            let data = reader.result;
+            setText((prevValue) => {
+              return {
+                ...prevValue,
+                [image]: data,
+              };
+            });
+            console.log(text);
+          };
+          reader.readAsDataURL(file); // ?????
+        }}
+        type="file"
+        accept="image/.jpg, image/.jpeg, image/.png"
+        name="image"
+      />
       <h3>Title</h3>
       <input
         onChange={handleChange}

@@ -21,6 +21,7 @@ export default function Create() {
   const [text, setText] = useState({
     title: "",
     content: "",
+    image: "",
   });
 
   function handleChange(e) {
@@ -31,10 +32,12 @@ export default function Create() {
         [name]: value,
       };
     });
+    console.log(text);
+    console.log(typeof text.image);
   }
 
   function sendData() {
-    if (text.title && text.content) {
+    if (text.title && text.content && text.image) {
       const day = new Date().getDate();
       const month = new Date().getMonth();
       const year = new Date().getFullYear();
@@ -62,21 +65,56 @@ export default function Create() {
 
   return (
     <div className="create-container">
-      <h3>Title</h3>
+      <h3>Choose an image*</h3>
+      <input
+        onChange={(e) => {
+          const image = e.target.name;
+          const img = e.target.files[0];
+          var file = img;
+          var reader = new FileReader();
+          reader.onloadend = function () {
+            let data = reader.result;
+            setText((prevValue) => {
+              return {
+                ...prevValue,
+                [image]: data,
+              };
+            });
+          };
+          reader.readAsDataURL(file); // ?????
+        }}
+        type="file"
+        accept="image/.jpg, image/.jpeg, image/.png"
+        name="image"
+      />
+      <br />
+      <h3>Title*</h3>
       <input onChange={handleChange} type="text" id="postTitle" name="title" />
-      <h3>Content</h3>
+      <br />
+      <h3>Content*</h3>
       <textarea
         onChange={handleChange}
         id="postContent"
         name="content"
         rows="4"
         cols="50"
-        style={{resize:"vertical"}}
+        style={{ resize: "vertical" }}
       ></textarea>
       <br />
-      <button onClick={sendData} className="postBtn">
-        <Link to="/">Post</Link>
-      </button>
+      <Link to="/">
+        <button onClick={sendData} className="postBtn">
+          Post
+        </button>
+      </Link>
     </div>
   );
 }
+
+// function encodeImageFileAsURL(img) {
+//   var file = img;
+//   var reader = new FileReader();
+//   reader.onloadend = function () {
+//     console.log("RESULT", reader.result);
+//   };
+//   reader.readAsDataURL(file);
+// }

@@ -11,7 +11,7 @@ const corsOptions = {
   origin: "*",
 };
 app.use(cors(corsOptions));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit:"50mb"}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // conecting with MongoDB
@@ -30,6 +30,7 @@ const connectDB = async () => {
 const postSchema = new mongoose.Schema({
   title: String,
   content: String,
+  image: String,
   dateOfCreation: String,
   dateOfModification: String,
   likes: Number,
@@ -56,6 +57,7 @@ postsRoute.post((req, res) => {
   const post = new Post({
     title: req.body.title,
     content: req.body.content,
+    image: req.body.image,
     dateOfCreation: req.body.dateOfCreation,
     likes: req.body.likes,
     views: req.body.views,
@@ -75,6 +77,7 @@ postsRoute.patch((req, res) => {
   Post.findByIdAndUpdate(req.body.id, {
     title: req.body.title,
     content: req.body.content,
+    image: req.body.image,
     dateOfModification: req.body.dateOfModification,
   })
     .then(() => {
@@ -101,7 +104,7 @@ postRoute.get((req, res) => {
 postRoute.post((req, res) => {
   Post.findByIdAndUpdate(
     req.params.id,
-    { $push: { comments: req.body.comment } },
+    { $push: { comments: req.body } },
     { new: true }
   )
     .then(() => {
