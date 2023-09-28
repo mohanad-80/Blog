@@ -2,6 +2,7 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import { useState } from "react";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function Navbar() {
   let body = document.querySelector("#root");
@@ -91,15 +92,17 @@ c36 61 78 162 119 290 83 256 89 660 14 916 -73 252 -176 424 -363 611 -102
       </Link>
       <ul>
         <li className="theme-container">
-          {/* <label>Dark mode</label>
+          <Tooltip title="Change theme" arrow  enterDelay={500}>
+            {/* <label>Dark mode</label>
           <Switch checked={darkmode} onChange={switchTheme} /> */}
-          <div className="theme-btn-container">
-            {darkmode ? (
-              <LightModeIcon className="theme-btn" onClick={switchTheme} />
-            ) : (
-              <NightsStayIcon className="theme-btn" onClick={switchTheme} />
-            )}
-          </div>
+            <div className="theme-btn-container">
+              {darkmode ? (
+                <LightModeIcon className="theme-btn" onClick={switchTheme} />
+              ) : (
+                <NightsStayIcon className="theme-btn" onClick={switchTheme} />
+              )}
+            </div>
+          </Tooltip>
         </li>
         {/* <button onClick={switchTheme}>Switch theme</button> */}
         <CustomLink to="/Create">Create</CustomLink>

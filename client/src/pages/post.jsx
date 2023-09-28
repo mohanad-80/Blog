@@ -20,6 +20,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
+import Tooltip from "@mui/material/Tooltip";
 
 const ITEM_HEIGHT = 48;
 
@@ -207,7 +208,7 @@ export default function Post() {
             </h5>
             {post.dateOfModification && (
               <h5>
-                <strong>Edited:</strong> {post.dateOfModification}
+                <strong>Modified:</strong> {post.dateOfModification}
               </h5>
             )}
           </div>
@@ -215,39 +216,47 @@ export default function Post() {
 
           <div className="stat">
             <div className="likes">
-              <Chip
-                icon={liked ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
-                label={likes}
-                onClick={increaseLiks}
-                variant="outlined"
-              />
+              <Tooltip title="Like" arrow enterDelay={500}>
+                <Chip
+                  icon={liked ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
+                  label={likes}
+                  onClick={increaseLiks}
+                  variant="outlined"
+                />
+              </Tooltip>
             </div>
             <div className="comments">
-              <Chip
-                icon={<ModeCommentOutlinedIcon />}
-                label={comments.length}
-                variant="outlined"
-                onClick={openCreateSection}
-              />
+              <Tooltip title="Add a comment" arrow enterDelay={500}>
+                <Chip
+                  icon={<ModeCommentOutlinedIcon />}
+                  label={comments.length}
+                  variant="outlined"
+                  onClick={openCreateSection}
+                />
+              </Tooltip>
             </div>
             <div className="share">
-              <Chip
-                icon={<SendRoundedIcon />}
-                label={<SimpleDialogDemo open={openDialog} />}
-                variant="outlined"
-                onClick={() => {
-                  setOpenDialog((prev) => {
-                    return !prev;
-                  });
-                }}
-              />
+              <Tooltip title="Share this post" arrow enterDelay={500}>
+                <Chip
+                  icon={<SendRoundedIcon />}
+                  label={<SimpleDialogDemo open={openDialog} />}
+                  variant="outlined"
+                  onClick={() => {
+                    setOpenDialog((prev) => {
+                      return !prev;
+                    });
+                  }}
+                />
+              </Tooltip>
             </div>
             <div className="views">
-              <Chip
-                icon={<RemoveRedEyeOutlinedIcon />}
-                label={post.views}
-                variant="outlined"
-              />
+              <Tooltip title="Views" arrow enterDelay={500}>
+                <Chip
+                  icon={<RemoveRedEyeOutlinedIcon />}
+                  label={post.views}
+                  variant="outlined"
+                />
+              </Tooltip>
             </div>
           </div>
           <hr />
